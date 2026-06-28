@@ -75,12 +75,18 @@ function Navbar() {
   }, []);
 
   const go = (href: string) => {
-    setOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (open) {
+      setOpen(false);
+      setTimeout(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-400 ${scrolled ? "bg-white/96 backdrop-blur-xl shadow-card border-b border-navy-100" : "bg-transparent"
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-400 ${scrolled || open ? "bg-white/96 backdrop-blur-xl shadow-card border-b border-navy-100" : "bg-transparent"
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -91,10 +97,10 @@ function Navbar() {
               <img src="/logo.png" alt="Panchajanya Logo" className="object-cover w-full h-full scale-[1.42] -translate-y-[11%]" />
             </div>
             <div className="text-left">
-              <div className={`font-display font-black text-base leading-none transition-colors ${scrolled ? "text-navy-800" : "text-white"}`}>
+              <div className={`font-display font-black text-base leading-none transition-colors ${scrolled || open ? "text-navy-800" : "text-white"}`}>
                 PANCHAJANYA
               </div>
-              <div className={`text-xs font-medium leading-none mt-0.5 transition-colors ${scrolled ? "text-gold-600" : "text-gold-400"}`}>
+              <div className={`text-xs font-medium leading-none mt-0.5 transition-colors ${scrolled || open ? "text-gold-600" : "text-gold-400"}`}>
                 25 Years of Trust &amp; Quality
               </div>
             </div>
@@ -106,7 +112,7 @@ function Navbar() {
               <button
                 key={l.href}
                 onClick={() => go(l.href)}
-                className={`px-3 py-2 rounded-lg text-[13px] font-semibold transition-all ${scrolled
+                className={`px-3 py-2 rounded-lg text-[13px] font-semibold transition-all ${scrolled || open
                     ? "text-navy-700 hover:text-navy-900 hover:bg-navy-50"
                     : "text-white/80 hover:text-white hover:bg-white/10"
                   }`}
@@ -125,7 +131,7 @@ function Navbar() {
           {/* Mobile */}
           <button
             onClick={() => setOpen(!open)}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled ? "text-navy-700 hover:bg-navy-50" : "text-white hover:bg-white/10"}`}
+            className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled || open ? "text-navy-700 hover:bg-navy-50" : "text-white hover:bg-white/10"}`}
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -303,7 +309,7 @@ function AboutSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" ref={ref} className="py-24 md:py-32 bg-white">
+    <section id="about" ref={ref} className="scroll-mt-16 lg:scroll-mt-20 py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -373,7 +379,7 @@ function AboutSection() {
             </div>
 
             {/* 4 sectors */}
-            <div className="grid grid-cols-2 gap-4">
+            <div id="products" className="scroll-mt-24 grid grid-cols-2 gap-4">
               {[
                 { icon: "🧪", title: "Animal Feed Supplements", color: "bg-blue-50 border-blue-100" },
                 { icon: "🧹", title: "Cleaning Products", color: "bg-emerald-50 border-emerald-100" },
@@ -416,7 +422,7 @@ function VisionMissionSection() {
   const inView = useInView(ref, { once: true, margin: "-70px" });
 
   return (
-    <section id="vision" ref={ref} className="py-24 md:py-32 gradient-section pattern-dots">
+    <section id="vision" ref={ref} className="scroll-mt-16 lg:scroll-mt-20 py-24 md:py-32 gradient-section pattern-dots">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -534,7 +540,7 @@ function WhyChooseSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="why-us" ref={ref} className="py-24 md:py-32 gradient-section pattern-grid">
+    <section id="why-us" ref={ref} className="scroll-mt-16 lg:scroll-mt-20 py-24 md:py-32 gradient-section pattern-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div variants={ST} initial="hidden" animate={inView ? "visible" : "hidden"} className="text-center mb-16">
@@ -591,7 +597,7 @@ function ManufacturingSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="manufacturing" ref={ref} className="py-24 md:py-32 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #1a0010 0%, #040203ff 40%, #090406ff 75%, #13050bff 100%)" }}>
+    <section id="manufacturing" ref={ref} className="scroll-mt-16 lg:scroll-mt-20 py-24 md:py-32 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #1a0010 0%, #040203ff 40%, #090406ff 75%, #13050bff 100%)" }}>
       <div className="absolute inset-0 pattern-dots-light opacity-15" />
       <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-gold-500/8 blur-3xl" />
       <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-navy-400/10 blur-3xl" />
@@ -714,7 +720,7 @@ function ClientsSection() {
   const doubled = [...CLIENTS, ...CLIENTS]; // for seamless loop
 
   return (
-    <section id="clients" ref={ref} className="py-24 md:py-32 bg-white">
+    <section id="clients" ref={ref} className="scroll-mt-16 lg:scroll-mt-20 py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div variants={ST} initial="hidden" animate={inView ? "visible" : "hidden"} className="text-center mb-14">
@@ -820,7 +826,7 @@ function ContactSection() {
   };
 
   return (
-    <section id="contact" ref={ref} className="py-24 md:py-32 bg-white">
+    <section id="contact" ref={ref} className="scroll-mt-16 lg:scroll-mt-20 py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div variants={ST} initial="hidden" animate={inView ? "visible" : "hidden"} className="text-center mb-16">
@@ -1101,7 +1107,7 @@ function FloatingButtons() {
 
   return (
     <>
-      {/* WhatsApp — fixed right */}z
+      {/* WhatsApp — fixed right */}
       <motion.a
         href="https://wa.me/917406365606"
         target="_blank"
