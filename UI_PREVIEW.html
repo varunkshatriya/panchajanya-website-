@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchajanya Pet Care - Corporate Website Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 2rem;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #1B4332;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .nav a:hover {
+            color: #40916C;
+        }
+        
+        .page-container {
+            display: none;
+        }
+        
+        .page-container.active {
+            display: block;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1B4332 0%, #40916C 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(212, 160, 23, 0.1);
+            border-radius: 50%;
+            filter: blur(50px);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .section {
+            padding: 4rem 2rem;
+            background: white;
+            margin: 2rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1B4332;
+        }
+        
+        .section p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .card {
+            background: #FAFAF8;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            color: #1B4332;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #1B4332;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: #40916C;
+            transform: scale(1.02);
+        }
+        
+        .btn-secondary {
+            background: #40916C;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1B4332;
+            color: #1B4332;
+        }
+        
+        .btn-outline:hover {
+            background: #1B4332;
+            color: white;
+        }
+        
+        .page-label {
+            display: inline-block;
+            background: #D4A017;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #666;
+        }
+        
+        .feature-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #40916C;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 3rem;
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-content h3 {
+            font-size: 1.1rem;
+            color: #1B4332;
+            margin: 0.5rem 0;
+        }
+        
+        .product-content p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1B4332;
+            box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #1B4332 0%, #40916C 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 1rem;
+            margin: 3rem 0;
+        }
+        
+        .cta-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1B4332;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 3/2;
+            background: linear-gradient(135deg, #dbeafe 0%, #d1c4e9 100%);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            background: #1B4332;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer p {
+            color: rgba(255,255,255,0.8);
+            margin: 0.5rem 0;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 0;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            border-radius: 0.5rem 0.5rem 0 0;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            margin-right: 0.25rem;
+        }
+        
+        .tab-btn.active {
+            background: #1B4332;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section h2 {
+                font-size: 1.75rem;
+            }
+            
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav {
+                overflow-x: auto;
+            }
+            
+            .nav a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav">
+        <a onclick="showPage('home')">🏠 Home</a>
+        <a onclick="showPage('about')">📖 About</a>
+        <a onclick="showPage('products')">🧴 Products</a>
+        <a onclick="showPage('manufacturing')">⚙️ Manufacturing</a>
+        <a onclick="showPage('private-label')">🏷️ Private Label</a>
+        <a onclick="showPage('gallery')">🖼️ Gallery</a>
+        <a onclick="showPage('contact')">📧 Contact</a>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page-container active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Premium Pet Care Excellence</h1>
+                <p>Trusted by distributors and retailers across India for over 15 years</p>
+                <button class="btn" onclick="showPage('products')">Explore Products</button>
+            </div>
+        </div>
+
+        <div class="section container">
+            <span class="page-label">About</span>
+            <h2>Who We Are</h2>
+            <p>Panchajanya Pet Care is a leading manufacturer of premium pet care products designed specifically for B2B partners—distributors, retailers, and veterinary clinics. With over 15 years of expertise, we've built trust through quality, innovation, and sustainable practices.</p>
+            <div class="grid grid-2">
+                <card class="card">
+                    <h3>100+ Products</h3>
+                    <p>Comprehensive range across 9 categories</p>
+                </card>
+                <card class="card">
+                    <h3>5000+ Retailers</h3>
+                    <p>Trusted by retail partners nationwide</p>
+                </card>
+            </div>
+        </div>
+
+        <div class="section" style="background: #f9fafb;">
+            <div class="container">
+                <span class="page-label">Why Choose</span>
+                <h2>Why Choose Panchajanya?</h2>
+                <div class="grid grid-4">
+                    <div class="card">
+                        <h3>✨ Premium Quality</h3>
+                        <p>GMP certified manufacturing with rigorous quality control</p>
+                    </div>
+                    <div class="card">
+                        <h3>💰 Competitive Pricing</h3>
+                        <p>Best margins for your business growth</p>
+                    </div>
+                    <div class="card">
+                        <h3>📦 Fast Delivery</h3>
+                        <p>Efficient logistics and supply chain</p>
+                    </div>
+                    <div class="card">
+                        <h3>🤝 Partner Support</h3>
+                        <p>Dedicated account management and marketing support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section container" style="margin: 3rem auto; width: 90%;">
+            <h2>Ready to Build Success Together?</h2>
+            <p>Become a Panchajanya partner and grow your business with our premium products</p>
+            <button class="btn" style="background: white; color: #1B4332;">Contact Our Sales Team</button>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page-container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Our Story</h1>
+                <p>15+ Years of Trusted Excellence in Pet Care</p>
+            </div>
+        </div>
+
+        <div class="section container">
+            <span class="page-label">Company Overview</span>
+            <h2>Our Journey</h2>
+            <div class="grid grid-2">
+                <div>
+                    <p>Founded in 2009, Panchajanya Pet Care started with a vision to create premium pet care products that retailers and distributors could trust. What began as a small manufacturing unit has grown into a trusted partner for over 5,000 retailers across India.</p>
+                    <ul class="feature-list">
+                        <li>Started with 5 product lines</li>
+                        <li>Now manufacturing 100+ SKUs</li>
+                        <li>GMP & ISO 9001:2015 certified</li>
+                        <li>Serving 500,000+ pets annually</li>
+                    </ul>
+                </div>
+                <div style="background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); padding: 2rem; border-radius: 1rem; text-align: center; color: #666; font-size: 1.5rem;">
+                    📊 Company Timeline
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background: #f9fafb;">
+            <div class="container">
+                <h2>Our Mission & Vision</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>🎯 Mission</h3>
+                        <p>To provide high-quality, affordable pet care solutions that help our retail and distributor partners thrive while ensuring the health and happiness of millions of pets.</p>
+                    </div>
+                    <div class="card">
+                        <h3>👁️ Vision</h3>
+                        <p>To be the most trusted pet care brand among B2B partners, known for innovation, reliability, and sustainable practices.</p>
+                    </div>
+                    <div class="card">
+                        <h3>💡 Values</h3>
+                        <p>Quality, Integrity, Innovation, Sustainability, and Partnership Excellence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section container">
+            <h2>Key Statistics</h2>
+            <div class="grid grid-4">
+                <div class="stat-box">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years in Business</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Products</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Retailers</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">500K+</div>
+                    <div class="stat-label">Pets Cared For</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCTS PAGE -->
+    <div id="products" class="page-container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Our Product Range</h1>
+                <p>100+ Premium Products Across 9 Categories</p>
+            </div>
+        </div>
+
+        <div class="section container">
+            <span class="page-label">Categories</span>
+            <h2>Product Categories</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active">🧴 Pet Shampoo</button>
+                <button class="tab-btn">🐜 Anti-Tick Shampoo</button>
+                <button class="tab-btn">💆 Pet Conditioner</button>
+                <button class="tab-btn">✂️ Grooming</button>
+                <button class="tab-btn">💐 Pet Perfume</button>
+                <button class="tab-btn">💨 Pet Powder</button>
+                <button class="tab-btn">🧻 Pet Wipes</button>
+                <button class="tab-btn">🛁 Hygiene</button>
+                <button class="tab-btn">🩹 Skin Care</button>
+            </div>
+
+            <h3>Featured Products</h3>
+            <div class="grid grid-3">
+                <div class="product-card">
+                    <div class="product-image">🧴</div>
+                    <div class="product-content">
+                        <span class="badge">Pet Shampoo</span>
+                        <h3>Premium Herbal Shampoo</h3>
+                        <p>Gentle formula for regular cleansing. Contains neem and eucalyptus extracts.</p>
+                        <ul class="feature-list" style="margin: 0; font-size: 0.9rem;">
+                            <li>pH Balanced</li>
+                            <li>100% Natural</li>
+                            <li>Dermatologist Tested</li>
+                        </ul>
+                        <button class="btn" style="width: 100%; margin-top: 1rem;">Send Inquiry</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🐜</div>
+                    <div class="product-content">
+                        <span class="badge">Anti-Tick</span>
+                        <h3>Anti-Tick & Flea Shampoo</h3>
+                        <p>Effective protection against parasites. Soothing ingredients for pet skin.</p>
+                        <ul class="feature-list" style="margin: 0; font-size: 0.9rem;">
+                            <li>Fast Acting</li>
+                            <li>Long Lasting</li>
+                            <li>Safe & Natural</li>
+                        </ul>
+                        <button class="btn" style="width: 100%; margin-top: 1rem;">Send Inquiry</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💆</div>
+                    <div class="product-content">
+                        <span class="badge">Conditioner</span>
+                        <h3>Nourishing Conditioner</h3>
+                        <p>Strengthens coat and improves shine. With argan oil and aloe vera.</p>
+                        <ul class="feature-list" style="margin: 0; font-size: 0.9rem;">
+                            <li>Moisturizing</li>
+                            <li>Strengthens Hair</li>
+                            <li>Reduces Breakage</li>
+                        </ul>
+                        <button class="btn" style="width: 100%; margin-top: 1rem;">Send Inquiry</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: #666; margin-bottom: 1rem;">Interested in bulk orders or becoming a distributor?</p>
+                <button class="btn btn-secondary" onclick="showPage('contact')">Get a Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MANUFACTURING PAGE -->
+    <div id="manufacturing" class="page-container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Manufacturing Excellence</h1>
+                <p>GMP Certified, ISO 9001:2015 Compliant, FSSAI Approved</p>
+            </div>
+        </div>
+
+        <div class="section container">
+            <span class="page-label">Quality</span>
+            <h2>Our Manufacturing Process</h2>
+            <p>We maintain the highest standards in pet care product manufacturing, ensuring every product meets international quality benchmarks.</p>
+
+            <h3 style="margin-top: 2rem; color: #1B4332;">7-Step Manufacturing Process</h3>
+            <div class="grid grid-3">
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">📦</h3>
+                    <h3>1. Raw Materials</h3>
+                    <p>Sourced from certified suppliers. Quality checked and stored properly.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">⚗️</h3>
+                    <h3>2. Formulation</h3>
+                    <p>Developed by experienced chemists using latest research.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">🏭</h3>
+                    <h3>3. Manufacturing</h3>
+                    <p>GMP certified facility with advanced machinery.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">🔬</h3>
+                    <h3>4. QC Testing</h3>
+                    <p>Rigorous testing for safety and efficacy.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">📦</h3>
+                    <h3>5. Packaging</h3>
+                    <p>Eco-friendly, sustainable packaging solutions.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">🏷️</h3>
+                    <h3>6. Traceability</h3>
+                    <p>Full batch tracking and recall capability.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background: #f9fafb;">
+            <div class="container">
+                <h2>Certifications & Compliance</h2>
+                <div class="grid grid-4">
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">🏅</h3>
+                        <h3>GMP Certified</h3>
+                        <p>Good Manufacturing Practices</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">📋</h3>
+                        <h3>ISO 9001:2015</h3>
+                        <p>Quality Management System</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">🍎</h3>
+                        <h3>FSSAI Approved</h3>
+                        <p>Food Safety Authority</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">❤️</h3>
+                        <h3>PETA Certified</h3>
+                        <p>Cruelty-Free Manufacturing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIVATE LABEL PAGE -->
+    <div id="private-label" class="page-container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Private Label Solutions</h1>
+                <p>Launch Your Own Pet Care Brand in Weeks, Not Months</p>
+            </div>
+        </div>
+
+        <div class="section container">
+            <span class="page-label">B2B Solutions</span>
+            <h2>Why Choose Our Private Label?</h2>
+            <div class="grid grid-2">
+                <div>
+                    <h3 style="color: #1B4332; margin-bottom: 1rem;">Fast Time to Market</h3>
+                    <p>Launch your brand in 4-6 weeks. No need to develop formulations from scratch.</p>
+                </div>
+                <div>
+                    <h3 style="color: #1B4332; margin-bottom: 1rem;">Low Minimum Order</h3>
+                    <p>MOQ as low as 500 units per SKU. Perfect for testing and growing markets.</p>
+                </div>
+                <div>
+                    <h3 style="color: #1B4332; margin-bottom: 1rem;">Custom Branding</h3>
+                    <p>Your logo, packaging design, and brand identity. Complete customization available.</p>
+                </div>
+                <div>
+                    <h3 style="color: #1B4332; margin-bottom: 1rem;">Quality Assurance</h3>
+                    <p>Same GMP standards and quality control as our own brands.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background: #f9fafb;">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="grid grid-3">
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">💬</h3>
+                        <h3>1. Consultation</h3>
+                        <p>Discuss your brand vision and product needs</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">🎨</h3>
+                        <h3>2. Design & Sample</h3>
+                        <p>We create samples for your approval</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">📦</h3>
+                        <h3>3. Production</h3>
+                        <p>Manufacturing your custom brand products</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">✓</h3>
+                        <h3>4. QC Check</h3>
+                        <p>Strict quality control and testing</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">🚚</h3>
+                        <h3>5. Packaging</h3>
+                        <p>Final packaging with your branding</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3 style="font-size: 2rem;">📤</h3>
+                        <h3>6. Delivery</h3>
+                        <p>Ready for market launch</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section container">
+            <h2>Perfect For</h2>
+            <div class="grid grid-4">
+                <div class="card">
+                    <h3>🛒 E-commerce Brands</h3>
+                    <p>Launch your pet care brand on marketplaces</p>
+                </div>
+                <div class="card">
+                    <h3>🏪 Retailers</h3>
+                    <p>Create exclusive house brands for your stores</p>
+                </div>
+                <div class="card">
+                    <h3>🐕 Veterinary Clinics</h3>
+                    <p>Branded products to recommend to customers</p>
+                </div>
+                <div class="card">
+                    <h3>🌍 Distributors</h3>
+                    <p>Expand portfolio with exclusive products</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GALLERY PAGE -->
+    <div id="gallery" class="page-container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Our Facilities & Operations</h1>
+                <p>State-of-the-art Manufacturing & Quality Control</p>
+            </div>
+        </div>
+
+        <div class="section container">
+            <span class="page-label">Visual Tour</span>
+            <h2>Gallery</h2>
+            <p>Explore our manufacturing facilities, quality labs, and commitment to excellence</p>
+
+            <div class="tabs">
+                <button class="tab-btn active">📸 Products</button>
+                <button class="tab-btn">🏭 Facility</button>
+                <button class="tab-btn">✓ Quality</button>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">📦 Product Range</div>
+                <div class="gallery-item">🧴 Shampoo Line</div>
+                <div class="gallery-item">💆 Conditioner Bottles</div>
+                <div class="gallery-item">🏭 Manufacturing Floor</div>
+                <div class="gallery-item">🔬 Quality Lab</div>
+                <div class="gallery-item">📊 Testing Equipment</div>
+            </div>
+        </div>
+
+        <div class="section" style="background: #f9fafb;">
+            <div class="container">
+                <h2>Our Commitment</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>🌱 Sustainability</h3>
+                        <p>Eco-friendly packaging and sustainable manufacturing processes to protect our planet.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🔍 Transparency</h3>
+                        <p>Open manufacturing process with facility tours available for partners and stakeholders.</p>
+                    </div>
+                    <div class="card">
+                        <h3>❤️ Animal Welfare</h3>
+                        <p>Cruelty-free testing and PETA certified operations ensuring ethical practices.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section container" style="margin: 3rem auto; width: 90%;">
+            <h2>Visit Us in Person</h2>
+            <p>We welcome facility tours, business visits, and partnerships. Schedule a visit to see our operations firsthand.</p>
+            <button class="btn" style="background: white; color: #1B4332;">Schedule a Tour</button>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page-container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Get in Touch</h1>
+                <p>We're here to help. Reach out with any questions or partnership opportunities.</p>
+            </div>
+        </div>
+
+        <div class="section container">
+            <span class="page-label">Contact Info</span>
+            <h2>Quick Contact</h2>
+            <div class="grid grid-4">
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">📞</h3>
+                    <h3>Phone</h3>
+                    <p style="font-weight: 600; color: #1B4332;">+91 98765 43210</p>
+                    <p style="font-size: 0.9rem;">Mon–Sat: 9 AM – 6 PM IST</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">✉️</h3>
+                    <h3>Email</h3>
+                    <p style="font-weight: 600; color: #1B4332;">info@panchajanyapetcare.com</p>
+                    <p style="font-size: 0.9rem;">Reply within 24 hours</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">📍</h3>
+                    <h3>Address</h3>
+                    <p style="font-weight: 600; color: #1B4332;">Mumbai, India</p>
+                    <p style="font-size: 0.9rem;">Head Office</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="font-size: 2rem;">💬</h3>
+                    <h3>WhatsApp</h3>
+                    <p style="font-weight: 600; color: #1B4332;">+91 98765 43210</p>
+                    <p style="font-size: 0.9rem;">Quick response</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section container">
+            <div class="grid grid-2" style="gap: 3rem;">
+                <div>
+                    <h2>Send us a Message</h2>
+                    <form>
+                        <div class="form-group">
+                            <label>Your Name *</label>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" placeholder="Your company">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="+91 98765 43210">
+                        </div>
+                        <div class="form-group">
+                            <label>Inquiry Type</label>
+                            <select>
+                                <option>General Enquiry</option>
+                                <option>Product Information</option>
+                                <option>Distributor Partnership</option>
+                                <option>Retail Partnership</option>
+                                <option>Private Label</option>
+                                <option>Bulk Order</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Message *</label>
+                            <textarea placeholder="Tell us how we can help..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Send Message →</button>
+                    </form>
+                </div>
+
+                <div>
+                    <h2>Why Contact Us?</h2>
+                    <ul class="feature-list">
+                        <li>Get detailed information about our products</li>
+                        <li>Explore distributor and retail partnership opportunities</li>
+                        <li>Learn about our private label manufacturing services</li>
+                        <li>Schedule facility tours or business meetings</li>
+                        <li>Discuss bulk orders or custom requirements</li>
+                    </ul>
+
+                    <div class="card" style="margin-top: 2rem;">
+                        <h3>⚡ Quick Response Time</h3>
+                        <p>Our dedicated team typically responds to all inquiries within 24 hours during business hours.</p>
+                        <p style="font-size: 0.9rem; margin-top: 1rem;">For urgent matters, please call us directly or reach out via WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section container" style="margin: 3rem auto; width: 90%;">
+            <h2>Ready to Partner With Us?</h2>
+            <p>Whether you're a retailer, distributor, or looking for private label solutions, we're here to help you succeed.</p>
+            <button class="btn" style="background: white; color: #1B4332; margin-right: 1rem;">Message on WhatsApp</button>
+            <button class="btn" style="background: white; color: #1B4332;">Send Email</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2024 Panchajanya Pet Care. All rights reserved.</p>
+        <p>🏅 GMP Certified | 📋 ISO 9001:2015 | 🍎 FSSAI Approved | ❤️ PETA Certified</p>
+        <p>Transforming Pet Care Partnerships Since 2009</p>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-container').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
