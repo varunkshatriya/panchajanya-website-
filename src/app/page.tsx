@@ -671,7 +671,7 @@ function StatsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
           {[
-            { count: c1, suffix: "+", label: "Years of Trust", sub: "Since 2005", icon: "🏆" },
+            { count: c1, suffix: "+", label: "Years of Trust", sub: "Since 2002", icon: "🏆" },
             { count: c2, suffix: "+", label: "Clients Served", sub: "Across India", icon: "🤝" },
             { count: c3, suffix: "+", label: "Product Categories", sub: "Growing portfolio", icon: "📦" },
             { count: c4, suffix: "+", label: "Industry Sectors", sub: "Diverse expertise", icon: "🌐" },
