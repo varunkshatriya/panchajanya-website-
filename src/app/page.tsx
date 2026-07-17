@@ -1077,15 +1077,15 @@ function Footer() {
             <h4 className="font-display font-bold text-white text-xs uppercase tracking-widest mb-5">Contact</h4>
             <ul className="space-y-4">
               <li>
-                <a href="tel:+919876543210" className="flex items-start gap-3 text-navy-400 hover:text-gold-400 transition-colors group">
-                  <Phone size={14} className="mt-0.5 text-gold-500 shrink-0" />
+                <a href="tel:+917406365606" className="flex items-start gap-3 text-navy-400 hover:text-gold-400 transition-colors group">
+                  <Phone size={10} className="mt-0.5 text-gold-500 shrink-0" />
                   <span className="text-sm">+91 74063 65606</span>
                 </a>
               </li>
               <li>
                 <a href="mailto:panchajanya2002@gmail.com" className="flex items-start gap-3 text-navy-400 hover:text-gold-400 transition-colors">
                   <Mail size={14} className="mt-0.5 text-gold-500 shrink-0" />
-                  <span className="text-sm break-all">panchajanya2002@gmail.com[panchajanya2002]</span>
+                  <span className="text-sm break-all">panchajanya2002@gmail.com</span>
                 </a>
               </li>
               
