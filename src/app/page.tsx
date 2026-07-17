@@ -701,23 +701,24 @@ function StatsSection() {
    SECTION 8 — OUR CLIENTS (CAROUSEL)
 ═══════════════════════════════════════════════════════════ */
 const CLIENTS = [
-  { name: "Cargill", sector: "Agribusiness", logo: "🌾" },
-  { name: "Kemin", sector: "Life Sciences", logo: "🔬" },
-  { name: "Nandini", sector: "Dairy", logo: "🥛" },
-  { name: "Geltec", sector: "Veterinary", logo: "💊" },
-  { name: "QuadraGen", sector: "Biotechnology", logo: "🧬" },
-  { name: "Ken", sector: "Agriculture", logo: "🌱" },
-  { name: "Multiplex", sector: "Agro-chemicals", logo: "⚗️" },
-  { name: "Rufa Vet", sector: "Veterinary", logo: "🐄" },
-  { name: "Bharat Electronics", sector: "Defence & Govt", logo: "🏛️" },
-  { name: "108 Emergency", sector: "Healthcare", logo: "🚑" },
-  { name: "Tropicool", sector: "Consumer Goods", logo: "❄️" },
+  { name: "Cargill", sector: "Agribusiness", logo: "/clients/cargill.png", abbr: "C", color: "#003087", bg: "#ffffff" },
+  { name: "Kemin", sector: "Life Sciences", logo: "/clients/kemin.png", abbr: "K", color: "#d4412e", bg: "#ffffff" },
+  { name: "Nandini", sector: "Dairy", logo: "/clients/nandini.png", abbr: "N", color: "#1a7e3e", bg: "#ffffff" },
+  { name: "Geltec", sector: "Veterinary Healthcare", logo: "/clients/geltec.png", abbr: "G", color: "#005b99", bg: "#ffffff" },
+  { name: "Mysuru City Corp.", sector: "Government", logo: "/clients/mysuru.png", abbr: "MC", color: "#5b3a8e", bg: "#ffffff" },
+  { name: "QuadraGen", sector: "Biotechnology", logo: "/clients/quadragen.png", abbr: "Q", color: "#1d6e9a", bg: "#ffffff" },
+  { name: "Ken", sector: "Agriculture", logo: "/clients/ken.png", abbr: "K", color: "#2e7d32", bg: "#ffffff" },
+  { name: "Multiplex", sector: "Agro-chemicals", logo: "/clients/multiplex.png", abbr: "M", color: "#c62828", bg: "#ffffff" },
+  { name: "Rufa Vet", sector: "Veterinary", logo: "/clients/rufavet.png", abbr: "RV", color: "#0277bd", bg: "#ffffff" },
+  { name: "Bharat Electronics", sector: "Defence & Govt.", logo: "/clients/bel.png", abbr: "BEL", color: "#37474f", bg: "#ffffff" },
+  { name: "108 Emergency", sector: "Healthcare", logo: "/clients/emergency108.png", abbr: "108", color: "#b71c1c", bg: "#ffffff" },
+  { name: "Tropicool", sector: "Consumer Goods", logo: "/clients/tropicool.png", abbr: "T", color: "#00695c", bg: "#ffffff" },
 ];
 
 function ClientsSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const doubled = [...CLIENTS, ...CLIENTS]; // for seamless loop
+  const doubled = [...CLIENTS, ...CLIENTS];
 
   return (
     <section id="clients" ref={ref} className="scroll-mt-16 lg:scroll-mt-20 py-24 md:py-32 bg-white">
@@ -737,52 +738,75 @@ function ClientsSection() {
           </motion.p>
         </motion.div>
 
-        {/* Carousel */}
-        <div className="overflow-hidden relative mb-12">
-          {/* Left fade */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
-          {/* Right fade */}
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
-
+        {/* Infinite Scroll Carousel */}
+        <div className="overflow-hidden relative mb-14">
+          <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
           <div className="flex animate-carousel" style={{ width: "max-content" }}>
             {doubled.map((c, i) => (
               <div
                 key={`${c.name}-${i}`}
-                className="flex-shrink-0 mx-3 w-52 p-5 rounded-2xl bg-navy-50 border border-navy-100 hover:border-gold-300 hover:shadow-gold transition-all group"
+                className="flex-shrink-0 mx-3 w-64 p-6 rounded-2xl bg-white border border-navy-100 shadow-sm hover:border-gold-300 hover:shadow-md hover:shadow-gold/10 transition-all group cursor-default"
               >
-                <div className="text-4xl mb-3 text-center">{c.logo}</div>
-                <div className="font-display font-black text-navy-900 text-sm text-center mb-1">{c.name}</div>
-                <div className="text-xs text-navy-400 text-center">{c.sector}</div>
+                <div
+                  className="w-full h-24 rounded-xl mx-auto mb-4 flex items-center justify-center overflow-hidden p-3 bg-white"
+                >
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    className="h-16 w-auto max-w-full object-contain transition-transform group-hover:scale-105"
+                  />
+                </div>
+                <div className="font-display font-black text-navy-900 text-base text-center mb-1 leading-tight">{c.name}</div>
+                <div className="text-xs text-navy-400 text-center font-medium">{c.sector}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Client grid — static for clarity */}
+        {/* Full Client Grid */}
         <motion.div
           variants={ST}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
         >
-          {CLIENTS.slice(0, 6).map((c) => (
+          {CLIENTS.map((c) => (
             <motion.div
               key={c.name}
               variants={FU}
-              whileHover={{ y: -4, scale: 1.04 }}
-              className="p-5 rounded-2xl bg-navy-50 border border-navy-100 hover:border-gold-300 hover:shadow-gold transition-all text-center group"
+              whileHover={{ y: -5, scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
+              className="relative p-5 rounded-2xl bg-white border border-navy-100 hover:border-gold-300 hover:shadow-md hover:shadow-gold/10 transition-all text-center group cursor-default overflow-hidden"
             >
-              <div className="text-4xl mb-2">{c.logo}</div>
-              <div className="font-bold text-navy-800 text-xs">{c.name}</div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-navy-50/50 to-white" />
+              <div className="relative z-10">
+                <div
+                  className="w-full h-24 rounded-xl mx-auto mb-3 flex items-center justify-center overflow-hidden p-3 bg-white"
+                >
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    className="h-16 w-auto max-w-full object-contain transition-transform group-hover:scale-105"
+                  />
+                </div>
+                <div className="font-bold text-navy-800 text-sm leading-tight mb-1">{c.name}</div>
+                <div className="text-[11px] text-navy-400 font-medium">{c.sector}</div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
 
         {/* Trust strip */}
-        <motion.div variants={FU} initial="hidden" animate={inView ? "visible" : "hidden"} className="mt-10 p-6 rounded-2xl bg-navy-900 text-center">
+        <motion.div
+          variants={FU}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 text-center"
+        >
           <p className="text-navy-300 text-sm font-medium">
-            <span className="text-gold-400 font-bold">11 marquee brands</span> across Agribusiness, Dairy, Veterinary, Defence, Healthcare and Consumer Goods —
-            <span className="text-white font-semibold"> all trust Panchajanya</span>.
+            <span className="text-gold-400 font-bold">12 marquee brands</span> across Agribusiness, Dairy, Veterinary, Government, Defence, Healthcare and Consumer Goods —{" "}
+            <span className="text-white font-semibold">all trust Panchajanya</span>.
           </p>
         </motion.div>
       </div>
@@ -865,8 +889,8 @@ function ContactSection() {
                 <div className="space-y-5">
                   {[
                     { icon: <Phone size={17} />, label: "Phone", val: "+91 74063 65606‬", href: "tel:+9174063 65606‬" },
-                    { icon: <Mail size={17} />, label: "Email", val: "info@panchajanyagroup.com", href: "mailto:info@panchajanyagroup.com" },
-                    { icon: <Globe size={17} />, label: "Website", val: "www.panchajanyagroup.com", href: "https://www.panchajanyagroup.com" },
+                    { icon: <Mail size={17} />, label: "Email", val: "panchajanya2002@gmail.com", href: "mailto:panchajanya2002@gmail.com" },
+                    { icon: <Globe size={17} />, label: "Website", val: "www.panchajanya.in", href: "https://www.panchajanya.in" },
                     { icon: <MapPin size={17} />, label: "Office", val: "Bengaluru, Karnataka, India", href: "#" },
                   ].map((i) => (
                     <a key={i.label} href={i.href} className="flex items-start gap-4 group" target={i.label === "Website" ? "_blank" : undefined} rel="noreferrer">
@@ -1025,8 +1049,8 @@ function Footer() {
             <p className="text-navy-400 text-sm leading-relaxed max-w-xs mb-5">
               Pioneering manufacturer and marketer of animal feed supplements, cleaning products, livestock solutions and human wellness products since 2002.
             </p>
-            <a href="https://www.panchajanyagroup.com" target="_blank" rel="noreferrer" className="text-gold-500 text-sm font-semibold hover:text-gold-400 flex items-center gap-1.5 transition-colors">
-              <Globe size={14} /> www.panchajanyagroup.com
+            <a href="https://www.panchajanya.in" target="_blank" rel="noreferrer" className="text-gold-500 text-sm font-semibold hover:text-gold-400 flex items-center gap-1.5 transition-colors">
+              <Globe size={14} /> www.panchajanya.in
             </a>
           </div>
 
@@ -1059,9 +1083,9 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@panchajanyagroup.com" className="flex items-start gap-3 text-navy-400 hover:text-gold-400 transition-colors">
+                <a href="mailto:panchajanya2002@gmail.com" className="flex items-start gap-3 text-navy-400 hover:text-gold-400 transition-colors">
                   <Mail size={14} className="mt-0.5 text-gold-500 shrink-0" />
-                  <span className="text-sm break-all">info@panchajanyagroup.com</span>
+                  <span className="text-sm break-all">panchajanya2002@gmail.com[panchajanya2002]</span>
                 </a>
               </li>
               
